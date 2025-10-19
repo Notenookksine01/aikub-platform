@@ -90,29 +90,32 @@ export class PerformanceAnalysisAgent implements AIAgent {
       logger.info(`${this.name} executing action: ${action.type}`);
 
       switch (action.type) {
-        case 'generate_performance_report':
+        case 'generate_performance_report': {
           const report = this.generatePerformanceReport(action.parameters.metrics);
           return {
             success: true,
             message: 'Performance report generated',
             data: { report },
           };
+        }
 
-        case 'identify_trends':
+        case 'identify_trends': {
           const trends = this.identifyTrends(action.parameters.metrics);
           return {
             success: true,
             message: 'Trends identified',
             data: { trends },
           };
+        }
 
-        case 'predict_outcomes':
+        case 'predict_outcomes': {
           const predictions = this.predictOutcomes(action.parameters.metrics);
           return {
             success: true,
             message: 'Outcomes predicted',
             data: { predictions },
           };
+        }
 
         default:
           return {

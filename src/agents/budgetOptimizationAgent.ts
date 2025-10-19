@@ -21,7 +21,7 @@ export class BudgetOptimizationAgent implements AIAgent {
 
     const insights: string[] = [];
     const recommendations: any[] = [];
-    let confidence = 0.8;
+    const confidence = 0.8;
 
     // Analyze ROI
     if (metrics.roi > this.minROI * 1.5) {
@@ -81,7 +81,7 @@ export class BudgetOptimizationAgent implements AIAgent {
       logger.info(`${this.name} executing action: ${action.type}`);
 
       switch (action.type) {
-        case 'calculate_optimal_budget':
+        case 'calculate_optimal_budget': {
           const currentBudget = action.parameters.currentBudget;
           const roi = action.parameters.roi;
           const optimalBudget = this.calculateOptimalBudget(currentBudget, roi);
@@ -91,6 +91,7 @@ export class BudgetOptimizationAgent implements AIAgent {
             message: `Optimal budget calculated: $${optimalBudget}`,
             data: { optimalBudget },
           };
+        }
 
         default:
           return {

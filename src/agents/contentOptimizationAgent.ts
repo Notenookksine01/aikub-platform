@@ -16,7 +16,7 @@ export class ContentOptimizationAgent implements AIAgent {
     const recommendations: any[] = [];
     const confidence = 0.8;
 
-    const { adCreative, performance } = data;
+    const { performance } = data;
 
     // Analyze engagement metrics
     if (performance.engagement < performance.reach * 0.02) {
@@ -76,7 +76,7 @@ export class ContentOptimizationAgent implements AIAgent {
       logger.info(`${this.name} executing action: ${action.type}`);
 
       switch (action.type) {
-        case 'generate_headline_variants':
+        case 'generate_headline_variants': {
           const headlines = this.generateHeadlineVariants(
             action.parameters.baseHeadline
           );
@@ -85,18 +85,18 @@ export class ContentOptimizationAgent implements AIAgent {
             message: 'Headline variants generated',
             data: { headlines },
           };
+        }
 
-        case 'suggest_cta_improvements':
-          const ctas = this.suggestCTAImprovements(
-            action.parameters.currentCTA
-          );
+        case 'suggest_cta_improvements': {
+          const ctas = this.suggestCTAImprovements();
           return {
             success: true,
             message: 'CTA improvements suggested',
             data: { ctas },
           };
+        }
 
-        case 'analyze_creative_performance':
+        case 'analyze_creative_performance': {
           const analysis = this.analyzeCreativePerformance(
             action.parameters.creativeData
           );
@@ -105,6 +105,7 @@ export class ContentOptimizationAgent implements AIAgent {
             message: 'Creative performance analyzed',
             data: { analysis },
           };
+        }
 
         default:
           return {
@@ -131,7 +132,7 @@ export class ContentOptimizationAgent implements AIAgent {
     ];
   }
 
-  private suggestCTAImprovements(currentCTA: string): string[] {
+  private suggestCTAImprovements(): string[] {
     return [
       'Get Started Free',
       'Claim Your Discount Now',

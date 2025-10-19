@@ -74,7 +74,7 @@ export class AudienceTargetingAgent implements AIAgent {
       logger.info(`${this.name} executing action: ${action.type}`);
 
       switch (action.type) {
-        case 'generate_targeting_recommendations':
+        case 'generate_targeting_recommendations': {
           const recommendations = this.generateTargetingRecommendations(
             action.parameters.audienceData
           );
@@ -84,8 +84,9 @@ export class AudienceTargetingAgent implements AIAgent {
             message: 'Targeting recommendations generated',
             data: { recommendations },
           };
+        }
 
-        case 'analyze_demographics':
+        case 'analyze_demographics': {
           const insights = this.analyzeDemographics(
             action.parameters.demographics
           );
@@ -95,6 +96,7 @@ export class AudienceTargetingAgent implements AIAgent {
             message: 'Demographics analyzed',
             data: { insights },
           };
+        }
 
         default:
           return {

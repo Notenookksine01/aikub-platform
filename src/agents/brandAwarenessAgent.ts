@@ -16,7 +16,7 @@ export class BrandAwarenessAgent implements AIAgent {
     const recommendations: any[] = [];
     const confidence = 0.85;
 
-    const { brandMetrics, campaignData } = data;
+    const { brandMetrics } = data;
 
     // Analyze reach and impressions
     if (brandMetrics.reach < 10000) {
@@ -76,7 +76,7 @@ export class BrandAwarenessAgent implements AIAgent {
       logger.info(`${this.name} executing action: ${action.type}`);
 
       switch (action.type) {
-        case 'generate_seo_keywords':
+        case 'generate_seo_keywords': {
           const keywords = this.generateSEOKeywords(
             action.parameters.industry,
             action.parameters.targetAudience
@@ -86,8 +86,9 @@ export class BrandAwarenessAgent implements AIAgent {
             message: 'SEO keywords generated',
             data: { keywords },
           };
+        }
 
-        case 'analyze_brand_sentiment':
+        case 'analyze_brand_sentiment': {
           const sentiment = this.analyzeBrandSentiment(
             action.parameters.mentions
           );
@@ -96,16 +97,16 @@ export class BrandAwarenessAgent implements AIAgent {
             message: 'Brand sentiment analyzed',
             data: { sentiment },
           };
+        }
 
-        case 'generate_content_strategy':
-          const strategy = this.generateContentStrategy(
-            action.parameters.brandGoals
-          );
+        case 'generate_content_strategy': {
+          const strategy = this.generateContentStrategy();
           return {
             success: true,
             message: 'Content strategy generated',
             data: { strategy },
           };
+        }
 
         default:
           return {
@@ -161,7 +162,7 @@ export class BrandAwarenessAgent implements AIAgent {
     };
   }
 
-  private generateContentStrategy(brandGoals: string[]): any {
+  private generateContentStrategy(): any {
     return {
       contentPillars: [
         'Educational content (How-to guides, tutorials)',
